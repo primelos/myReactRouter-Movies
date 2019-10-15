@@ -48,6 +48,7 @@ body {
   border: 1px solid grey;
   padding: 5px;
 }
+
 .save-wrapper {
   position: relative;
   width: 75%;
@@ -69,4 +70,7 @@ body {
 .home-button {
   padding: 5px 10px;
   background-color: lightskyblue;
+}
+.movie-list a{
+  text-decoration: none;
 }
