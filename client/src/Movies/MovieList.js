@@ -1,61 +1,50 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import {Route, NavLink} from 'react-router-dom'
-import Movie from './Movie'
-import MovieCard from './MovieCard';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { Route, NavLink } from "react-router-dom";
+
+import MovieCard from "./MovieCard";
+import Actors from './Actors';
 
 const MovieList = props => {
-  const [movies, setMovies] = useState([])
+  const [movies, setMovies] = useState([]);
   useEffect(() => {
     const getMovies = () => {
       axios
-        .get('http://localhost:5000/api/movies')
+        .get("http://localhost:5000/api/movies")
         .then(response => {
           setMovies(response.data);
         })
         .catch(error => {
-          console.error('Server Error', error);
+          console.error("Server Error", error);
         });
-    }
-    
+    };
+
     getMovies();
   }, []);
-  
+
   return (
+    <div>
     <div className="movie-list">
       {movies.map(movie => (
-        
-        <MovieCard key={movie.id} movie={movie} addToSavedList={props.addToSavedList}/>
-        
+        <MovieCard
+          key={movie.id}
+          movie={movie}
+          addToSavedList={props.addToSavedList}
+        />
       ))}
+      
+      <NavLink to="/actor">All Famous Actors</NavLink>
+    </div>
+    <div>
+{movies.map(movie => (
+  <Actors
+    key={movie.id}
+    movie={movie}
+  />
+))}
+    </div>
     </div>
   );
-}
-
-// function MovieDetails( props ) {
-  // const { title, director, metascore, stars } = movie;
-  // console.log(`movie`, movie)
-  // return (
-
-    // <MovieCard movie={props.movie} addToSavedList={props.addToSavedList}/>
-    // <div className="movie-card">
-    //   <h2>{title}</h2>
-    //   <div className="movie-director">
-    //     Director: <em>{director}</em>
-    //   </div>
-    //   <div className="movie-metascore">
-    //     Metascore: <strong>{metascore}</strong>
-    //   </div>
-    //   <h3>Actors</h3>
-
-    //   {stars.map(star => (
-       
-    //     <div key={star} className="movie-star">
-    //       {star}
-    //     </div>
-       
-    //   ))}
-    // </div>
-  
+};
 
 export default MovieList;

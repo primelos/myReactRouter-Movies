@@ -47,6 +47,7 @@ body {
   color: blue;
   border: 1px solid grey;
   padding: 5px;
+  background-color: red; 
 }
 
 .save-wrapper {
